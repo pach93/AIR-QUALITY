@@ -16,7 +16,7 @@ export class CityAirQualityService {
     const cleaned_longitude = parseFloat(longitude)
     const cleaned_latitude = parseFloat(latitude)
 
-    if(!cleaned_longitude){
+    if(!cleaned_longitude || cleaned_longitude < -180 || cleaned_longitude > 180){
       throw new HttpException({
         status: HttpStatus.FORBIDDEN,
         error: 'unsopported longitude type',
@@ -25,7 +25,7 @@ export class CityAirQualityService {
       });
     }
 
-    if(!cleaned_latitude){
+    if(!cleaned_latitude || cleaned_latitude < -90 || cleaned_latitude > 90){
       throw new HttpException({
         status: HttpStatus.FORBIDDEN,
         error: 'unsopported latitude type',
