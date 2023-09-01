@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, UnsupportedMediaTypeException } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 import axios from 'axios';
 import { error } from 'console';
@@ -12,12 +12,9 @@ import { Repository } from 'typeorm';
 export class CityAirQualityService {
   constructor(
     @InjectRepository(CityAirQuality)
-    private readonly userRepository: Repository<CityAirQuality>,
+    private readonly cityAirRepository: Repository<CityAirQuality>,
     
   ) {}
-  remove(id: number) {
-    return `This action removes a #${id} cityAirQuality`;
-  }
 
   async getAirQuality({longitude, latitude}){
     const cleaned_longitude = parseFloat(longitude)
@@ -40,7 +37,7 @@ export class CityAirQualityService {
         cause: error
       });
     }
-    // console.log(cleaned_longitude)
+
     try {
       const datas = (await axios.get(`http://api.airvisual.com/v2/nearest_city?lat=${cleaned_latitude}&lon=${cleaned_longitude}&key=c860c685-96a2-40ae-9d2a-10563eb4a901`)).data
       await console.log(datas.status)
@@ -78,12 +75,7 @@ export class CityAirQualityService {
     } catch (e) {
       console.log('airService#error@data', e ? e.message.substring(0, 12) : '');
     }
-    
-    // await console.log(data)
-    
-
-    
-
+        
     const currentdate = new Date(); 
     const datetime = currentdate.getDate() + "/"
                     + (currentdate.getMonth()+1)  + "/" 
@@ -94,12 +86,10 @@ export class CityAirQualityService {
     
     airQuality.date = new Date(datetime)
     try {
-      await this.userRepository.save(airQuality);
+      await this.cityAirRepository.save(airQuality);
     } catch (e) {
       console.log('airService#error@data', e ? e.message : '');
     }
-
-
     
   }
 }

@@ -1,7 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { CityAirQualityService } from './city-air-quality.service';
-import { CreateCityAirQualityDto } from './dto/create-city-air-quality.dto';
-import { UpdateCityAirQualityDto } from './dto/update-city-air-quality.dto';
 
 @Controller('city-air-quality')
 export class CityAirQualityController {

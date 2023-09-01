@@ -24,7 +24,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The goal of this project is to create a REST API responsible for exposing  “the air
+quality information” of a nearest city to GPS coordinates using  iqair.
+It also store in database the pollution level of Paris every minute.
 
 ## Installation
 
@@ -44,6 +46,14 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+## Usage
+
+```bash
+Endpoint: http://localhost:3000/city-air-quality?longitude={{ longitude }}&latitude={{ latitude }}
+params:
+  - longitude: required([-180,180])
+  - latitude: required([-90, 90])
+```
 
 ## Test
 
@@ -57,17 +67,3 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
